@@ -14,3 +14,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+//Route::get('/', function () {
+//    return 'Hello World';
+//});
+
+$router->get('/notes/', 'NoteController@index');
+$router->post('/notes/', 'NoteController@store');
+$router->get('/notes/{id}', 'NoteController@show');
+$router->put('/notes/{id}', 'NoteController@update');
+$router->delete('/note/{id}', 'NoteController@destroy');
