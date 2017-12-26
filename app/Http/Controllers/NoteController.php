@@ -56,6 +56,7 @@ class NoteController extends ExampleController
             'completed'=> false
             //need to include the user id this belongs to
         ]);
+        //redirect('/notes');
         return response()->json($note['id'], 201);
     }
 

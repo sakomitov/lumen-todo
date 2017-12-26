@@ -16,8 +16,7 @@ class UsersTableSeeder extends Seeder {
 			User::create([
 				'username' => $faker->uuid(),
 				'password' => $faker->password(),
-				'api_token' => $faker->sha256()]);
-
+				'api_token' =>substr($faker->sha256(),0,32)]);
 		}
 
 	}

@@ -21,3 +21,5 @@ $router->post('/notes/', 'NoteController@store');
 $router->get('/notes/{id}', 'NoteController@show');
 $router->put('/notes/{id}', 'NoteController@update');
 $router->delete('/notes/{id}', 'NoteController@destroy');
+
+$router->post('/users/', 'UserController@store');
