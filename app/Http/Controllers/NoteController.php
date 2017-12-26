@@ -8,6 +8,9 @@
 
 namespace App\Http\Controllers;
 use App\Note;
+//use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 
 class NoteController extends ExampleController
@@ -19,13 +22,30 @@ class NoteController extends ExampleController
 
     public function show($id) {
 
-        $note = Note::find($id);
+        $note = Note::where('id', $id)->get();
 
         if(! $note) {
             return $this->respondNotFound('No such note exists!');
         } else {
-            return response()->json([$note]);
+            return response()->json($note, 200);
         }
     }
+
+    public function store(Request $request)
+    {
+
+        if (!$request->has('title') or !$request->has('description'))
+        {
+            return $this->setStatusCode(400)
+                ->respondWithError('Parameters failed verification. A to-do must have a title and description.');
+        }
+        Note::create([
+            'title' => $request->get('title'),
+            'description'=> $request->get('description'),
+            'completed'=> false
+            //need to include the user id this belongs to
+        ]);
+    }
+
 
 }
