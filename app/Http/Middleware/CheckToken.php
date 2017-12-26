@@ -9,6 +9,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class CheckToken
 {
@@ -21,6 +22,11 @@ class CheckToken
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $auth = $request->header();
+        if (!array_key_exists('authorization', $auth)){
+            return response()->json(['Unauthorized'], 400);
+        } else {
+            return $next($request);
+        }
     }
 }
