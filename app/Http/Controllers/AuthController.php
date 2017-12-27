@@ -12,6 +12,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Illuminate\Support\Facades\Request as FacadeRequest;
+
+
 
 class AuthController extends ExampleController
 {
@@ -44,13 +47,13 @@ class AuthController extends ExampleController
     }
 
     public function destroy(Request $request) {
-        $user = Auth::user();
+        $user = Auth::check();
         if (! $user) {
             return response()->json(["error" => "You must be logged in to log out!"], 400);
         } else {
             $shuffled_token = str_shuffle(Auth::user()->api_token);
             Auth::user()->update(['api_token' => $shuffled_token]);
-            return $shuffled_token;
+            return redirect('/');
         }
     }
 }
