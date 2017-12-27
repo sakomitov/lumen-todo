@@ -14,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
 class Note extends Model
 {
     protected $fillable =
-        ['title', 'description', 'completed'];
+        ['title', 'description', 'completed', 'user_id'];
 
     protected $hidden =
-        ['created_at', 'updated_at', 'user_id', 'id'];
+        ['created_at', 'updated_at', 'id'];
 }

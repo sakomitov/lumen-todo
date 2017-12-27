@@ -23,3 +23,6 @@ $router->put('/notes/{id}', 'NoteController@update');
 $router->delete('/notes/{id}', 'NoteController@destroy');
 
 $router->post('/users/', 'UserController@store');
+
+$router->post('/auth/', 'AuthController@store');
+$router->delete('/auth/', 'AuthController@destroy');

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -35,6 +36,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         //establish the relationship between Users and Notes.
         return $this->hasMany('App\Note','user_id');
+    }
 
+    public function getId()
+    {
+        return $this->id;
     }
 }

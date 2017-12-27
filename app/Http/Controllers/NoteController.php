@@ -10,8 +10,7 @@ namespace App\Http\Controllers;
 use App\Note;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Log;
 
 
 class NoteController extends ExampleController
@@ -51,14 +50,12 @@ class NoteController extends ExampleController
             return $this->setStatusCode(400)
                 ->respondWithError('Parameters failed verification. A to-do must have a title and description.');
         }
-        //$user = Auth::user();
         //if it passes the requirements, make a new note
         $note = Note::create([
             'title' => $request->get('title'),
             'description'=> $request->get('description'),
             'completed'=> false,
-            //'user_id' => $user['username']
-            //need to include the user id this belongs to
+            'user_id' => Auth::user()->id
         ]);
         //redirect('/notes');
         return response()->json($note['id'], 201);

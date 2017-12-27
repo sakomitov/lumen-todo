@@ -29,7 +29,7 @@ class UserController extends Controller
                     'password' => $request->get('password'),
                     'api_token' => str_random(32)
                 ]);
-                return $new_user['api_token'];
+
             } else {
                 return response()->json(['error' => 'passwords do not match'], 400);
             }
