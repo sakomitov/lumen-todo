@@ -58,10 +58,10 @@ $app->singleton(
 | route or middleware that'll be assigned to some specific routes.
 |
 */
+$app->middleware([
+    App\Http\Middleware\Cors::class
+]);
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
 
  $app->routeMiddleware([
      'checktoken' => App\Http\Middleware\CheckToken::class,

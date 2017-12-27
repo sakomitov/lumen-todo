@@ -18,8 +18,7 @@ class UserController extends Controller
         //check required fields ot create a user
         if (!$request->has('username') or !$request->has('password') or !$request->has('password_confirmation'))
         {
-            return $this->setStatusCode(400)
-                ->respondWithError('Please input a username, a pasword, and confirm the password.');
+            return response()->json(['error' => 'Please input a username, a pasword, and confirm the password.'], 400);
         }
         $user = User::where('username', '=', $request->get('username'))->first();
         if ($user === null) {

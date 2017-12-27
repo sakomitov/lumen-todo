@@ -46,7 +46,7 @@ class AuthController extends ExampleController
         }
     }
 
-    public function destroy(Request $request) {
+    public function destroy() {
         $user = Auth::check();
         if (! $user) {
             return response()->json(["error" => "You must be logged in to log out!"], 400);

@@ -25,4 +25,4 @@ $router->delete('/notes/{id}', 'NoteController@destroy');
 $router->post('/users/', 'UserController@store');
 
 $router->post('/auth/', 'AuthController@store');
-$router->delete('/auth/', ['middleware' => ['example'], 'uses'=>'AuthController@destroy']);
+$router->delete('/auth/', ['middleware' => ['auth'], 'uses'=>'AuthController@destroy']);
