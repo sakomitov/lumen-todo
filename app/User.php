@@ -29,4 +29,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'created_at', 'updated_at',
     ];
+
+    public function note()
+
+    {
+        //establish the relationship between Users and Notes.
+        return $this->hasMany('App\Note','user_id');
+
+    }
 }

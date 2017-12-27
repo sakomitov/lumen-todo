@@ -19,23 +19,25 @@ class NoteController extends ExampleController
     public function __construct()
     {
         $this->middleware('checktoken');
-        $user = Auth::user();
+        $this->middleware('auth');
+        //$user = Auth::user();
     }
 
 
     public function index(){
         //get all the notes
-        $notes = Note::all();
+        $notes = Auth::user()->note()->get();
+        //$notes = Note::all();
         //return array of notes
         return response()->json(['notes' => $notes], 200);
     }
 
     public function show($id) {
         //try to get the note with matching id
-        $note = Note::where('id', $id)->first();
+        $note = Auth::user()->note()->where('id', $id)->first();
 
         if(! $note) {
-            return $this->respondNotFound('No such note exists!');
+            return $this->respondNotFound('No such note exists in your notes!');
         } else {
             return response()->json($note, 200);
         }
@@ -49,11 +51,13 @@ class NoteController extends ExampleController
             return $this->setStatusCode(400)
                 ->respondWithError('Parameters failed verification. A to-do must have a title and description.');
         }
+        //$user = Auth::user();
         //if it passes the requirements, make a new note
         $note = Note::create([
             'title' => $request->get('title'),
             'description'=> $request->get('description'),
-            'completed'=> false
+            'completed'=> false,
+            //'user_id' => $user['username']
             //need to include the user id this belongs to
         ]);
         //redirect('/notes');
